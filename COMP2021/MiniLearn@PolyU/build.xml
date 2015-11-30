@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="LEARN@PolyU">
+    
+    <property environment="env"/>
+    <property name="junit.output.dir" value="testreport"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.8"/>
+    <property name="source" value="1.8"/>
+    <property name="lib.dir" value="lib"/>
+    <property name="bin.dir" value="bin"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="doc.dir" value="doc"/>
+    <property name="src.dir" value="src"/>
+              	
+    <path id="LEARN@PolyU.classpath">
+        <pathelement location="bin"/>
+    	<pathelement location="${lib.dir}/junit-3.8.1.jar"/>
+    	<pathelement location="${lib.dir}/ant-junit.jar"/>
+    	<pathelement location="${lib.dir}/jakarta-ant-1.4.1-optional.jar"/>
+    </path>
+              	
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+              	
+    <target name="clean">
+        <delete dir="bin"/>
+        <delete dir="testreport"/>
+    	<delete dir="dist"/>
+    	<delete dir="jar"/>
+    	<delete dir="doc"/>
+    </target>
+              	
+    <target depends="clean" name="cleanall"/>
+              	
+    <target depends="build-subprojects,build-project" name="build"/>
+              	
+    <target name="build-subprojects"/>
+              	
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="LEARN@PolyU.classpath"/>
+        </javac>
+    </target>
+              	
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+              	
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+ 
+    <target name="test" depends="compile">
+    	<mkdir dir="testreport"/>
+        <junit printsummary="true" fork="true">
+        	<formatter type="xml" usefile="true"/>
+        	<classpath refid="LEARN@PolyU.classpath"/>
+
+	        <batchtest fork="on" todir="${junit.output.dir}" haltonfailure="no">
+	            <fileset dir="bin">
+	                <include name="**/*Test*"/>
+	            </fileset>
+	        </batchtest>                 
+	     </junit>   	
+	     <junitreport todir="${junit.output.dir}">
+	         <fileset dir="${junit.output.dir}">
+	             <include name="TEST-*.xml" />
+	         </fileset>
+	         <report format="frames" todir="${junit.output.dir}" />
+	     </junitreport>             	
+    </target>   	
+   	           	
+    <target name="jar" depends="compile">
+    	<jar destfile="${dist.dir}/LEARN@PolyU.jar" basedir="${bin.dir}">
+    		<manifest>
+    			<attribute name="Main-Class" value="ui.Demo"/>
+    	    </manifest>
+    	</jar>
+   	</target>        
+       	
+    <target name="run" depends="jar">
+       <java jar="${dist.dir}/LEARN@PolyU.jar" fork="true">
+       </java>
+    </target> 	
+              	
+    <target name="doc" depends="compile">
+    	<javadoc packagenames="src" sourcepath="${src.dir}" destdir="${doc.dir}">
+        	<classpath refid="LEARN@PolyU.classpath"/>
+    		<fileset dir="${src.dir}">
+    			<include name="**"/>
+         	</fileset>
+         </javadoc>
+    </target>
+              	
+    <target name="compile">
+    	<mkdir dir="bin"/>
+    	<javac srcdir="src" destdir="bin" classpathref="LEARN@PolyU.classpath"  includeantruntime="on"/>
+    </target>
+    		
+</project>
