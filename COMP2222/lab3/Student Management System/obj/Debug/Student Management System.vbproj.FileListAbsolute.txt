@@ -1,0 +1,11 @@
+D:\Code\Visual Studio\Visual StudioProjects\Student Management System\Student Management System\bin\Debug\Student Management System.exe.config
+D:\Code\Visual Studio\Visual StudioProjects\Student Management System\Student Management System\bin\Debug\Student Management System.exe
+D:\Code\Visual Studio\Visual StudioProjects\Student Management System\Student Management System\bin\Debug\Student Management System.pdb
+D:\Code\Visual Studio\Visual StudioProjects\Student Management System\Student Management System\bin\Debug\Student Management System.xml
+D:\Code\Visual Studio\Visual StudioProjects\Student Management System\Student Management System\obj\Debug\Student Management System.vbprojResolveAssemblyReference.cache
+D:\Code\Visual Studio\Visual StudioProjects\Student Management System\Student Management System\obj\Debug\Student_Management_System.Form1.resources
+D:\Code\Visual Studio\Visual StudioProjects\Student Management System\Student Management System\obj\Debug\Student_Management_System.Resources.resources
+D:\Code\Visual Studio\Visual StudioProjects\Student Management System\Student Management System\obj\Debug\Student Management System.vbproj.GenerateResource.Cache
+D:\Code\Visual Studio\Visual StudioProjects\Student Management System\Student Management System\obj\Debug\Student Management System.exe
+D:\Code\Visual Studio\Visual StudioProjects\Student Management System\Student Management System\obj\Debug\Student Management System.xml
+D:\Code\Visual Studio\Visual StudioProjects\Student Management System\Student Management System\obj\Debug\Student Management System.pdb

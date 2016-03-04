@@ -1,0 +1,11 @@
+D:\Code\Visual Studio\Visual StudioProjects\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.exe.config
+D:\Code\Visual Studio\Visual StudioProjects\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.exe
+D:\Code\Visual Studio\Visual StudioProjects\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.pdb
+D:\Code\Visual Studio\Visual StudioProjects\WindowsApplication2\WindowsApplication2\bin\Debug\WindowsApplication2.xml
+D:\Code\Visual Studio\Visual StudioProjects\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.vbprojResolveAssemblyReference.cache
+D:\Code\Visual Studio\Visual StudioProjects\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.Form1.resources
+D:\Code\Visual Studio\Visual StudioProjects\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.Resources.resources
+D:\Code\Visual Studio\Visual StudioProjects\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.vbproj.GenerateResource.Cache
+D:\Code\Visual Studio\Visual StudioProjects\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.exe
+D:\Code\Visual Studio\Visual StudioProjects\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.xml
+D:\Code\Visual Studio\Visual StudioProjects\WindowsApplication2\WindowsApplication2\obj\Debug\WindowsApplication2.pdb

@@ -1,0 +1,22 @@
+C:\Users\Yunkun\OneDrive\文档\Operating Systems\lab4\lab4\bin\Debug\lab4.exe.config
+C:\Users\Yunkun\OneDrive\文档\Operating Systems\lab4\lab4\obj\Debug\lab4.vbprojResolveAssemblyReference.cache
+C:\Users\Yunkun\OneDrive\文档\Operating Systems\lab4\lab4\obj\Debug\lab4.Form1.resources
+C:\Users\Yunkun\OneDrive\文档\Operating Systems\lab4\lab4\obj\Debug\lab4.Resources.resources
+C:\Users\Yunkun\OneDrive\文档\Operating Systems\lab4\lab4\obj\Debug\lab4.vbproj.GenerateResource.Cache
+C:\Users\Yunkun\OneDrive\文档\Operating Systems\lab4\lab4\bin\Debug\lab4.exe
+C:\Users\Yunkun\OneDrive\文档\Operating Systems\lab4\lab4\bin\Debug\lab4.pdb
+C:\Users\Yunkun\OneDrive\文档\Operating Systems\lab4\lab4\bin\Debug\lab4.xml
+C:\Users\Yunkun\OneDrive\文档\Operating Systems\lab4\lab4\obj\Debug\lab4.exe
+C:\Users\Yunkun\OneDrive\文档\Operating Systems\lab4\lab4\obj\Debug\lab4.xml
+C:\Users\Yunkun\OneDrive\文档\Operating Systems\lab4\lab4\obj\Debug\lab4.pdb
+D:\Code\Visual Studio\Visual StudioProjects\lab4\lab4\bin\Debug\lab4.exe.config
+D:\Code\Visual Studio\Visual StudioProjects\lab4\lab4\obj\Debug\lab4.exe
+D:\Code\Visual Studio\Visual StudioProjects\lab4\lab4\obj\Debug\lab4.xml
+D:\Code\Visual Studio\Visual StudioProjects\lab4\lab4\obj\Debug\lab4.pdb
+D:\Code\Visual Studio\Visual StudioProjects\lab4\lab4\bin\Debug\lab4.exe
+D:\Code\Visual Studio\Visual StudioProjects\lab4\lab4\bin\Debug\lab4.pdb
+D:\Code\Visual Studio\Visual StudioProjects\lab4\lab4\bin\Debug\lab4.xml
+D:\Code\Visual Studio\Visual StudioProjects\lab4\lab4\obj\Debug\lab4.vbprojResolveAssemblyReference.cache
+D:\Code\Visual Studio\Visual StudioProjects\lab4\lab4\obj\Debug\lab4.Form1.resources
+D:\Code\Visual Studio\Visual StudioProjects\lab4\lab4\obj\Debug\lab4.Resources.resources
+D:\Code\Visual Studio\Visual StudioProjects\lab4\lab4\obj\Debug\lab4.vbproj.GenerateResource.Cache

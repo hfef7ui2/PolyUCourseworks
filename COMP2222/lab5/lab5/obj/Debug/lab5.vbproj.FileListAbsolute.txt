@@ -1,0 +1,11 @@
+D:\Code\GitHub\PolyUCoursework\COMP2222\lab5\lab5\bin\Debug\lab5.exe.config
+D:\Code\GitHub\PolyUCoursework\COMP2222\lab5\lab5\bin\Debug\lab5.exe
+D:\Code\GitHub\PolyUCoursework\COMP2222\lab5\lab5\bin\Debug\lab5.pdb
+D:\Code\GitHub\PolyUCoursework\COMP2222\lab5\lab5\bin\Debug\lab5.xml
+D:\Code\GitHub\PolyUCoursework\COMP2222\lab5\lab5\obj\Debug\lab5.vbprojResolveAssemblyReference.cache
+D:\Code\GitHub\PolyUCoursework\COMP2222\lab5\lab5\obj\Debug\lab5.Form1.resources
+D:\Code\GitHub\PolyUCoursework\COMP2222\lab5\lab5\obj\Debug\lab5.Resources.resources
+D:\Code\GitHub\PolyUCoursework\COMP2222\lab5\lab5\obj\Debug\lab5.vbproj.GenerateResource.Cache
+D:\Code\GitHub\PolyUCoursework\COMP2222\lab5\lab5\obj\Debug\lab5.exe
+D:\Code\GitHub\PolyUCoursework\COMP2222\lab5\lab5\obj\Debug\lab5.xml
+D:\Code\GitHub\PolyUCoursework\COMP2222\lab5\lab5\obj\Debug\lab5.pdb
