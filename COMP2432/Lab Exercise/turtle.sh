@@ -9,12 +9,12 @@ declare -i next=0
 if [ $# -eq 0 ]; then
     for ((i=1; i<=13; i++)); do
         next=$(( $RANDOM % 52 + 1 ))
-	until [ ${record[next]}  -eq 0 ]; do
-	    next=$(( $RANDOM % 52 + 1 ))
+	    until [ ${record[next]}  -eq 0 ]; do
+	        next=$(( $RANDOM % 52 + 1 ))
         done
-	record[$next]=1 
+	    record[$next]=1 
         echo -e " ${cards[$next]}\c"
-     done
+    done
     numOfCards=13
 else	    
     for input in $*; do
