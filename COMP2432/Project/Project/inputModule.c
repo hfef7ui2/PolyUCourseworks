@@ -1,9 +1,15 @@
 ﻿#include "header.h"
 
+int ConvertDayNumber(const int a, const int b);
+void ConvertTime(const char a[], const char b[]);
+void ConvertTenant(const char a[]);
+void ConvertDuration(const char a[]);
+void ConvertEquipment(const char a[]);
+int coreInput(FILE *stream);
 
 int para[15];
-int timeSet = 0;//The # of the day which first request is on, default 0. 
-int ConvertDayNumber(int a, int b) {
+int time_set = 0;//The # of the day which first request is on, default 0. 
+int ConvertDayNumber(const int a, const int b) {
   int temp = 0;
   switch (a) {
     case 12:temp += 30;
@@ -21,16 +27,16 @@ int ConvertDayNumber(int a, int b) {
   }
   return temp;
 }
-void ConvertTime(char a[], char b[]) {
+void ConvertTime(const char a[], const char b[]) {
   int month = (a[5] - '0') * 10 + (a[6] - '0');//month
   int day = (a[8] - '0') * 10 + (a[9] - '0');//day
-  if (!timeSet) {
-    timeSet = ConvertDayNumber(month, day);
+  if (!time_set) {
+    time_set = ConvertDayNumber(month, day);
   }
-  para[13] = (ConvertDayNumber(month, day) - timeSet + 13) * 9 + (b[0] - '0') * 10 + (b[1] - '0') - 9;
+  para[13] = (ConvertDayNumber(month, day) - time_set + 13) * 9 + (b[0] - '0') * 10 + (b[1] - '0') - 9;
 }
 
-void ConvertTenant(char a[]) {
+void ConvertTenant(const char a[]) {
   if (strcmp(a, "tenant_A") == 0) {
     para[0] = 1;
   } else if (strcmp(a, "tenant_B") == 0) {
@@ -40,11 +46,11 @@ void ConvertTenant(char a[]) {
   }
 }
 
-void ConvertDuration(char a[]) {
+void ConvertDuration(const char a[]) {
   para[14] = (a[0] - '0');
 }
 
-void ConvertEquipment(char a[]) {
+void ConvertEquipment(const char a[]) {
   if (strcmp(a, "room_A") == 0) {
     para[3] = 1;
   } else if (strcmp(a, "room_B") == 0) {
@@ -70,8 +76,7 @@ void ConvertEquipment(char a[]) {
 
 int coreInput(FILE *stream) {
   int isPrint = 0;//whether command is print
-  int tenant_A = 0, tenant_B = 0, tenant_C = 0, room_A = 0, room_B = 0, webcam_720p = 0, webcam_1080p = 0, monitor_50 = 0, monitor_75 = 0, projector_fhd = 0, projector_xga = 0, screen_100 = 0, screen_150 = 0;
-  int hour = 0, duration = 0;
+ 
   int i;
   int type = -1;
   char t[20];
@@ -96,9 +101,9 @@ int coreInput(FILE *stream) {
       if (t[0] == 'a') {//addPresentation
         type = 2;
       } else {//endProgram
-        int temp;
-        for (temp = 0; temp < 12; temp++) {
-          Send(temp, "E00");
+        int temp2;
+        for (temp2 = 0; temp2 < 12; temp2++) {
+          Send(temp2, "E00");
         }
         return 0;
       }
@@ -111,7 +116,7 @@ int coreInput(FILE *stream) {
       break;
     case 'B'://addBatch
       break;
-    case 'n'://printSchd
+    case 'n'://PrintSchd
       isPrint = 1;
       type = -2;
       break;
@@ -123,7 +128,7 @@ int coreInput(FILE *stream) {
   temp[strlen(temp) - 1] = '\0';
   require[i++] = strtok(temp, " ;-�C");
 
-  while (require[i++] = strtok(NULL, " ;\n"));
+  while (require[i++] = strtok(NULL, " ;\n\0"));
 
   if (type == -1) {//addBatch
     int stop = 0;
@@ -146,7 +151,7 @@ int coreInput(FILE *stream) {
           coreInput(f3);
         }
       }
-    } else printf("not found.\n");
+    } else printf("You might entered an empty line of command.\n");
   } else if (!isPrint) {//add: equipment, date, time, duration, tenant, equipment, equipment
     ConvertTime(require[1], require[2]);
     ConvertDuration(require[3]);
@@ -157,7 +162,7 @@ int coreInput(FILE *stream) {
       if (require[ttemp] && strcmp(require[ttemp], "") != 0)
         ConvertEquipment(require[ttemp]);
     }
-    addRecord(para[0], para[1], para[2], para[3], para[4], para[5], para[6], para[7], para[8], para[9], para[10], para[11], para[12], para[13], para[14], type);
+    AddRecord(para[0], para[1], para[2], para[3], para[4], para[5], para[6], para[7], para[8], para[9], para[10], para[11], para[12], para[13], para[14], type);
 
   } else {//print
     if (strcmp(require[0], "fcfs") == 0) {

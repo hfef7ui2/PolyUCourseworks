@@ -34,21 +34,20 @@ typedef struct Record {
 } Record;
 
 Record* head;//head of record list
-Record* headS;//head of sorted record list
-int** parentToChild;
-int** childToParent;
-int* timeSlot;
-int numOfBooking;
+Record* head_s;//head of sorted record list
+int** parent_to_child;
+int** child_to_parent;
+int* time_slot;
+int num_of_booking;
 
 void SchdFcfs();
 void SchdOpti();
 void SchdPrio();
-Record* createRecordList(Record* rd);
-int Send(int i, char* message);
-void WaitForSchd(int childNumber);
+Record* createRecordList(Record* const rd);
+int Send(const int i, const char* const message);
+void WaitForSchd(const int child_number);
 int WaitForBooking();
-int addRecord(int tenant_A, int tenant_B, int tenant_C, int room_A, int room_B, int webcam_720p, int webcam_1080p, int monitor_50, int monitor_75, int projector_fhd, int projector_xga, int screen_100, int screen_150, int hour, int duration, int type);
-int printSchd(Record* rd);
-int Send(int i, char* message);
+int AddRecord(const int tenant_A, const int tenant_B, const int tenant_C, const int room_A, const int room_B, const int webcam_720p, const int webcam_1080p, const int monitor_50, const int monitor_75, const int projector_fhd, const int projector_xga, const int screen_100, const int screen_150, const int hour, const int duration, const int type);
+void PrintSchd(Record* const rd);
 
 #endif

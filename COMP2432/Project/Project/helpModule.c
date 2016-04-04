@@ -1,6 +1,6 @@
 #include "header.h"
 
-Record* createRecordList(Record* rd) {
+Record* createRecordList(Record* const rd) {
   if (rd != NULL) {
     rd->type = -1;
     rd->tenant_A = -1;
@@ -27,27 +27,27 @@ Record* createRecordList(Record* rd) {
   return rd;
 }
 
-int addRecord(int tenant_A, int tenant_B, int tenant_C, int room_A, int room_B, int webcam_720p, int webcam_1080p, int monitor_50, int monitor_75, int projector_fhd, int projector_xga, int screen_100, int screen_150, int hour, int duration, int type) {
+int AddRecord(const int tenant_A, const int tenant_B, const int tenant_C, const int room_A, const int room_B, const int webcam_720p, const int webcam_1080p, const int monitor_50, const int monitor_75, const int projector_fhd, const int projector_xga, const int screen_100, const int screen_150, const int hour, const int duration, const int type) {
   if (NULL == head) return 0;
 
-  numOfBooking++;
+  num_of_booking++;
 
   Record* nex = head->next;
   Record* cur = head;
-  Record* nexS = headS->next;
-  Record* curS = headS;
+  Record* nex_s = head_s->next;
+  Record* cur_s = head_s;
 
   while (NULL != nex) {
     cur = nex;
     nex = nex->next;
-    curS = nexS;
-    nexS = nexS->next;
+    cur_s = nex_s;
+    nex_s = nex_s->next;
   }
 
   nex = (Record*) malloc(sizeof(Record));
   cur->next = nex;
-  nexS = (Record*) malloc(sizeof(Record));
-  curS->next = nexS;
+  nex_s = (Record*) malloc(sizeof(Record));
+  cur_s->next = nex_s;
 
   nex->type = type;
   nex->tenant_A = tenant_A;
@@ -81,43 +81,43 @@ int addRecord(int tenant_A, int tenant_B, int tenant_C, int room_A, int room_B, 
   if (nex->screen_100) nex->weight += duration;
   if (nex->screen_150) nex->weight += duration;
 
-  nexS->type = type;
-  nexS->tenant_A = tenant_A;
-  nexS->tenant_B = tenant_B;
-  nexS->tenant_C = tenant_C;
-  nexS->room_A = room_A;
-  nexS->room_B = room_B;
-  nexS->webcam_720p = webcam_720p;
-  nexS->webcam_1080p = webcam_1080p;
-  nexS->monitor_50 = monitor_50;
-  nexS->monitor_75 = monitor_75;
-  nexS->projector_fhd = projector_fhd;
-  nexS->projector_xga = projector_xga;
-  nexS->screen_100 = screen_100;
-  nexS->screen_150 = screen_150;
-  nexS->hour = hour;
-  nexS->duration = duration;
-  nexS->pre = curS;
-  nexS->next = NULL;
-  nexS->accept = 0;
-  nexS->weight = nex->weight;
+  nex_s->type = type;
+  nex_s->tenant_A = tenant_A;
+  nex_s->tenant_B = tenant_B;
+  nex_s->tenant_C = tenant_C;
+  nex_s->room_A = room_A;
+  nex_s->room_B = room_B;
+  nex_s->webcam_720p = webcam_720p;
+  nex_s->webcam_1080p = webcam_1080p;
+  nex_s->monitor_50 = monitor_50;
+  nex_s->monitor_75 = monitor_75;
+  nex_s->projector_fhd = projector_fhd;
+  nex_s->projector_xga = projector_xga;
+  nex_s->screen_100 = screen_100;
+  nex_s->screen_150 = screen_150;
+  nex_s->hour = hour;
+  nex_s->duration = duration;
+  nex_s->pre = cur_s;
+  nex_s->next = NULL;
+  nex_s->accept = 0;
+  nex_s->weight = nex->weight;
 
   return 1;
 }
 
-int Send(int i, char* message) {
-  char ch = message[2];
-  char messageFromChild[2];
-  write(parentToChild[i][1], message, 3);
-  read(childToParent[i][0], messageFromChild, 2);
+int Send(const int i, const char* const message_to_child) {
+  char command_type = message_to_child[2];
+  char message_from_child[2];
+  write(parent_to_child[i][1], message_to_child, 3);
+  read(child_to_parent[i][0], message_from_child, 2);
 
-  if (ch == 'Q') {
-    if (messageFromChild[0] == 'O') {
+  if (command_type == 'Q') {
+    if (message_from_child[0] == 'O') {
       return 1;
     } else
       return 0;
-  } else if (ch == 'T') {
-    return (int) messageFromChild[0];
+  } else if (command_type == 'T') {
+    return (int) message_from_child[0];
   }
   return 0;
 }

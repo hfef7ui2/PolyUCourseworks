@@ -2,18 +2,25 @@
 
 char user[20];
 int num = 0;
-int timeSlotRecord[10];
-extern int timeSet;
-void printAccept(Record* rd);
-void printReject(Record* rd);
-int(*printTimeHelper(int a))[2];
-void printTime(Record* rd);
-void printType(Record* rd);
-void printRequester(Record* rd);
-void printDevice(Record* rd, int type);
-void format(int num);
+int time_slot_record[10];
+extern int time_set;
+void PrintAccept(Record* rd);
+void PrintReject(Record* rd);
+int(*PrintTimeHelper(int a))[2];
+void PrintTime(Record* rd);
+void PrintType(Record* rd);
+void PrintRequester(Record* rd);
+void PrintDevice(Record* rd, int type);
+void Format(int num);
 
-int printSchd(Record* rd) {
+void PrintSchd(Record* const rd) {
+  Record* cur = rd;
+  int rejected_a = 0;
+  int rejected_b = 0;
+  int total = 0;
+  int i;
+  char message_from_child[2];
+
   //Accepted Part
   printf(" ____________________________________________________________________________ \n");
   printf("|                                                                            |\n");
@@ -23,156 +30,157 @@ int printSchd(Record* rd) {
   printf("|                                                                            |\n");
   printf("|Date         Start   End     Type          Requester  Device                |\n");
   printf("|============================================================================|\n");
-  Record* cur = rd;
-  int rejectedA = 0;
-  int rejectedB = 0;
-  int total = 0;
-  int i;
-  char messageToChild[2];
-  char messageFromChild[2];
+
   while (cur->next != NULL) {
     cur = cur->next;
     total++;
-    if (cur->room_A == 1 && cur->accept == 1) {
-      printAccept(cur);
-    } else if (cur->room_A == 1)rejectedA++;
+    if (cur->room_A == 1 && cur->accept == 1)
+      PrintAccept(cur);
+    else if (cur->room_A == 1)
+      rejected_a++;
   }
+
   printf("|                                                                            |\n");
   printf("|Room_B has the following bookings:                                          |\n");
   printf("|                                                                            |\n");
   printf("|Date         Start   End     Type          Requester  Device                |\n");
   printf("|============================================================================|\n");
+  
   cur = rd;
   while (cur->next != NULL) {
     cur = cur->next;
-    if (cur->room_B == 1 && cur->accept == 1) printAccept(cur);
-    else if (cur->room_B == 1)rejectedB++;
-
+    if (cur->room_B == 1 && cur->accept == 1)
+      PrintAccept(cur);
+    else if (cur->room_B == 1)
+      rejected_b++;
   }
+
   printf("|                                                                            |\n");
   printf("|   -End-                                                                    |\n");
   printf("|============================================================================|\n");
   printf("|____________________________________________________________________________|\n");
-
 
   //Rejected Part
   printf(" ____________________________________________________________________________ \n");
   printf("|                                                                            |\n");
   printf("|***Room Booking - REJECTED***                                               |\n");
   printf("|                                                                            |\n");
-  printf("|Room_A, there are %d bookings rejected.                                      ", rejectedA);
-  format(rejectedA);
+  printf("|Room_A, there are %d bookings rejected.                                      ", rejected_a);
+  Format(rejected_a);
   printf("|\n");
   printf("|                                                                            |\n");
   printf("|Date         Start   End     Type          Device                           |\n");
   printf("|============================================================================|\n");
+
   cur = rd;
   while (cur->next != NULL) {
     cur = cur->next;
-    if (cur->room_A == 1 && cur->accept == 0) printReject(cur);
-
+    if (cur->room_A == 1 && cur->accept == 0) PrintReject(cur);
   }
+
   printf("|                                                                            |\n");
-  printf("|Room_B, there are %d bookings rejected.                                      ", rejectedB);
-  format(rejectedB);
+  printf("|Room_B, there are %d bookings rejected.                                      ", rejected_b);
+  Format(rejected_b);
   printf("|\n");
   printf("|                                                                            |\n");
   printf("|Date         Start   End     Type          Device                           |\n");
   printf("|============================================================================|\n");
+  
   cur = rd;
   while (cur->next != NULL) {
     cur = cur->next;
-    if (cur->room_B == 1 && cur->accept == 0) printReject(cur);
-
+    if (cur->room_B == 1 && cur->accept == 0)
+      PrintReject(cur);
   }
+  
   printf("|                                                                            |\n");
   printf("|   -End-                                                                    |\n");
   printf("|============================================================================|\n");
   printf("|____________________________________________________________________________|\n");
 
-
+  //Performance part
   printf(" ____________________________________________________________________________ \n");
   printf("|                                                                            |\n");
   printf("|Performance:                                                                |\n");
   printf("|                                                                            |\n");
-  printf("|Total Number of Bookings Received: %d (100%%)                                 ", total);
-  format(total);
+  printf("|Total Number of Bookings Received: %d (100.0%%)                               ", total);
+  Format(total);
   printf("|\n");
-  printf("|      Number of Bookings Assigned: %d (%d%%)                                   ", total - rejectedA - rejectedB, total == 0 ? 0 : (total - rejectedA - rejectedB) * 100 / total);
-  format(total - rejectedA - rejectedB);
-  format(total == 0 ? 0 : (total - rejectedA - rejectedB) * 100 / total);
+  printf("|      Number of Bookings Assigned: %d (%.1f%%)                                 ", total - rejected_a - rejected_b, total == 0 ? 0.0 : (double) (total - rejected_a - rejected_b) * 100.0 / (double) total);
+  Format(total - rejected_a - rejected_b);
+  Format(total == 0 ? 0 : (total - rejected_a - rejected_b) * 100 / total);
   printf("|\n");
-  printf("|      Number of Bookings Rejected: %d (%d%%)                                   ", rejectedA + rejectedB, total == 0 ? 0 : (rejectedA + rejectedB) * 100 / total);
-  format(rejectedA + rejectedB);
-  format(total == 0 ? 0 : (rejectedA + rejectedB) * 100 / total);
+  printf("|      Number of Bookings Rejected: %d (%.1f%%)                                 ", rejected_a + rejected_b, total == 0 ? 0.0 : (double) (rejected_a + rejected_b) * 100.0 / (double) (total));
+  Format(rejected_a + rejected_b);
+  Format(total == 0 ? 0 : (rejected_a + rejected_b) * 100 / total);
   printf("|\n");
   printf("|Utilization of Time Slot:                                                   |\n");
   printf("|                                                                            |\n");
 
-  messageToChild[2] = 'T';
   for (i = 0; i < 10; i++) {
-    timeSlotRecord[i] = Send(i, messageToChild);
+    time_slot_record[i] = Send(i, "00T");
   }
-  printf("|      Room_A                  - %d%%                                          ", timeSlotRecord[0] * 100 / 126);
-  format(timeSlotRecord[0] * 100 / 126);
+  
+  printf("|      Room_A                  - %.1f%%                                        ", (double) time_slot_record[0] * 100.0 / 126.0);
+  Format(time_slot_record[0] * 100 / 126);
   printf("|\n");
 
-  printf("|      Room_B                  - %d%%                                          ", timeSlotRecord[1] * 100 / 126);
-  format(timeSlotRecord[1] * 100 / 126);
+  printf("|      Room_B                  - %.1f%%                                        ", (double) time_slot_record[1] * 100.0 / 126.0);
+  Format(time_slot_record[1] * 100 / 126);
   printf("|\n");
 
-  printf("|      webcam_720p             - %d%%                                          ", timeSlotRecord[2] * 100 / 126);
-  format(timeSlotRecord[2] * 100 / 126);
+  printf("|      webcam_720p             - %.1f%%                                        ", (double) time_slot_record[2] * 100.0 / 126.0);
+  Format(time_slot_record[2] * 100 / 126);
   printf("|\n");
 
-  printf("|      webcam_1080p            - %d%%                                          ", timeSlotRecord[3] * 100 / 126);
-  format(timeSlotRecord[3] * 100 / 126);
+  printf("|      webcam_1080p            - %.1f%%                                        ", (double) time_slot_record[3] * 100.0 / 126.0);
+  Format(time_slot_record[3] * 100 / 126);
   printf("|\n");
 
-  printf("|      monitor_50              - %d%%                                          ", timeSlotRecord[4] * 100 / 126);
-  format(timeSlotRecord[4] * 100 / 126);
+  printf("|      monitor_50              - %.1f%%                                        ", (double) time_slot_record[4] * 100.0 / 126.0);
+  Format(time_slot_record[4] * 100 / 126);
   printf("|\n");
 
-  printf("|      monitor_75              - %d%%                                          ", timeSlotRecord[5] * 100 / 126);
-  format(timeSlotRecord[5] * 100 / 126);
+  printf("|      monitor_75              - %.1f%%                                        ", (double) time_slot_record[5] * 100.0 / 126.0);
+  Format(time_slot_record[5] * 100 / 126);
   printf("|\n");
 
-  printf("|      projector_fhd           - %d%%                                          ", timeSlotRecord[6] * 100 / 126);
-  format(timeSlotRecord[6] * 100 / 126);
+  printf("|      projector_fhd           - %.1f%%                                        ", (double) time_slot_record[6] * 100.0 / 126.0);
+  Format(time_slot_record[6] * 100 / 126);
   printf("|\n");
 
-  printf("|      projector_xga           - %d%%                                          ", timeSlotRecord[7] * 100 / 126);
-  format(timeSlotRecord[7] * 100 / 126);
+  printf("|      projector_xga           - %.1f%%                                        ", (double) time_slot_record[7] * 100.0 / 126.0);
+  Format(time_slot_record[7] * 100 / 126);
   printf("|\n");
 
-  printf("|      screen_100              - %d%%                                          ", timeSlotRecord[8] * 100 / 126);
-  format(timeSlotRecord[8] * 100 / 126);
+  printf("|      screen_100              - %.1f%%                                        ", (double) time_slot_record[8] * 100.0 / 126.0);
+  Format(time_slot_record[8] * 100 / 126);
   printf("|\n");
 
-  printf("|      screen_150              - %d%%                                          ", timeSlotRecord[9] * 100 / 126);
-  format(timeSlotRecord[9] * 100 / 126);
+  printf("|      screen_150              - %.1f%%                                        ", (double) time_slot_record[9] * 100.0 / 126.0);
+  Format(time_slot_record[9] * 100 / 126);
   printf("|\n");
 
   printf("|____________________________________________________________________________|\n");
 }
 
-void printAccept(Record* rd) {
-  printTime(rd);
-  printType(rd);
-  printRequester(rd);
-  printDevice(rd, 1);
+void PrintAccept(Record* rd) {
+  PrintTime(rd);
+  PrintType(rd);
+  PrintRequester(rd);
+  PrintDevice(rd, 1);
 }
 
-void printReject(Record* rd) {
-  printTime(rd);
-  printType(rd);
-  printDevice(rd, 0);
+void PrintReject(Record* rd) {
+  PrintTime(rd);
+  PrintType(rd);
+  PrintDevice(rd, 0);
 }
 
-int(*printTimeHelper(int a))[2]{
-  int i;
+int(*PrintTimeHelper(int a))[2]{
+int i;
 int leap[13] = { 0,31,60,91,121,152,183,213,244,274,305,335,366 };
-int temp = a / 9 - 13 + timeSet;
+int temp = a / 9 - 13 + time_set;
 int(*monthday)[2];
 monthday = malloc(2 * sizeof(int));
 for (i = 1; i < 13; i++) {
@@ -185,12 +193,12 @@ for (i = 1; i < 13; i++) {
 return monthday;
 }
 
-void printTime(Record* rd) {
+void PrintTime(Record* rd) {
   char date[6];
   char start[3];
   char end[3];
   int(*day)[2];
-  day = printTimeHelper(rd->hour);
+  day = PrintTimeHelper(rd->hour);
   date[5] = '\0';
   start[2] = '\0';
   end[2] = '\0';
@@ -210,7 +218,7 @@ void printTime(Record* rd) {
   printf("|2016-%s   %s:00   %s:00   ", date, start, end);
 }
 
-void printType(Record* rd) {
+void PrintType(Record* rd) {
   char type[15];//14+1
   switch (rd->type) {
     case 0: strcpy(type, "Device        "); break;
@@ -221,7 +229,7 @@ void printType(Record* rd) {
   printf("%s", type);
 }
 
-void printRequester(Record* rd) {
+void PrintRequester(Record* rd) {
   char requester[] = "tenant_A   ";//11+1
   if (rd->tenant_B) {
     requester[7] = 'B';
@@ -231,7 +239,7 @@ void printRequester(Record* rd) {
   printf("%s", requester);
 }
 
-void printDevice(Record* rd, int isAccepted) {//ugly
+void PrintDevice(Record* rd, int isAccepted) {//ugly
   int isFirst = 1;
 
   if (rd->webcam_720p) {
@@ -348,7 +356,7 @@ void printDevice(Record* rd, int isAccepted) {//ugly
 }
 
 
-void format(int num) {
+void Format(int num) {
   num /= 10;
   while (num > 0) {
     printf("\b");
