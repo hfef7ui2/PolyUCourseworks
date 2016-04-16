@@ -34,7 +34,6 @@ typedef struct Record {
 } Record;
 
 Record* head;//head of record list
-Record* head_s;//head of sorted record list
 int** parent_to_child;
 int** child_to_parent;
 int* time_slot;
@@ -49,5 +48,10 @@ void WaitForSchd(const int child_number);
 int WaitForBooking();
 int AddRecord(const int tenant_A, const int tenant_B, const int tenant_C, const int room_A, const int room_B, const int webcam_720p, const int webcam_1080p, const int monitor_50, const int monitor_75, const int projector_fhd, const int projector_xga, const int screen_100, const int screen_150, const int hour, const int duration, const int type);
 void PrintSchd(Record* const rd);
+int IsCompatible(const Record* a, const Record* b);
+void Genetic();
+int SendAll(const Record* const cur, const char ch);
+void Book(const Record* const rd);
+void Clean();
 
 #endif

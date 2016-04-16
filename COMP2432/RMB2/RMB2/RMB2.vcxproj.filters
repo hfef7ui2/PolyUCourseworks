@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source files">
+      <UniqueIdentifier>{b282079f-fc10-42db-90b6-9cb9882d3692}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header files">
+      <UniqueIdentifier>{da86f1a2-2308-416e-a0f4-01a4912a958e}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource files">
+      <UniqueIdentifier>{d282166b-c688-4646-a6a7-5bedc7582bbc}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Make files">
+      <UniqueIdentifier>{bfe897d7-f16e-41cf-91df-5658b4bb18ed}</UniqueIdentifier>
+      <Extensions>*.mak</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="outputModule.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="scheduleModule.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="inputModule.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="helpModule.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="geneticAlgorithm.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="RBM.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Makefile" />
+    <None Include="debug.mak">
+      <Filter>Make files</Filter>
+    </None>
+    <None Include="release.mak">
+      <Filter>Make files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="header.h">
+      <Filter>Source files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

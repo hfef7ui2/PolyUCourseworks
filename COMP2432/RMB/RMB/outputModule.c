@@ -186,7 +186,7 @@ void PrintReject(Record* rd) {
 }
 
 int(*PrintTimeHelper(int a))[2]{
-int i;
+  int i;
 int leap[13] = { 0,31,60,91,121,152,183,213,244,274,305,335,366 };
 int temp = a / 9 - 13 + time_set;
 int(*monthday)[2];

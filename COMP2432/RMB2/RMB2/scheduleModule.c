@@ -3,17 +3,13 @@
 int IsAvailable(const Record* const rd);
 void Book(const Record* const rd);
 void Cancel(const Record* const rd);
-void SortTime();
-int SendAll(const Record* const cur, const char ch);
-void Clean();
 void ReSchedule();
-void SortWeight();
 
 unsigned char message_to_child[3];
 unsigned char message_from_child[2];
 
 int IsCompatible(const Record* a, const Record* b) {
-  if (b->hour > (a->hour + a->duration)) return 1;
+  if (b->hour >= (a->hour + a->duration) || a->hour >= (b->hour + b->duration)) return 1;
   if (a->room_A && b->room_A) return 0;
   if (a->room_B && b->room_B) return 0;
   if (a->webcam_720p && b->webcam_720p) return 0;
@@ -60,9 +56,7 @@ void SchdPrio() {
 }
 
 void SchdOpti() {
-  Clean();
-  SortWeight();
-  SchdFcfs(head_s);
+  Genetic();
   ReSchedule();
 }
 
@@ -72,7 +66,7 @@ void ReSchedule() {
   for (i = 0; i < num_of_booking; i++)
     hour_backup[i] = -1;
 
-  Record* cur = head_s;
+  Record* cur = head;
 
   int startHour = (cur->hour / 9) * 9;
 
@@ -106,10 +100,10 @@ void ReSchedule() {
     j++;
   }
 
-  PrintSchd(head_s);
+  PrintSchd(head);
 
   j = 0;
-  cur = head_s;
+  cur = head;
   while (cur->next != NULL) {
     cur = cur->next;
     cur->hour = hour_backup[j++];
@@ -129,15 +123,12 @@ void Cancel(const Record* const rd) {
 }
 
 void Clean() {
-  Record *cur, *cur_s;
+  Record *cur;
   cur = head;
-  cur_s = head_s;
   if (num_of_booking > 0) {
     while (cur->next != NULL) {
       cur = cur->next;
-      cur_s = cur_s->next;
       cur->accept = 0;
-      cur_s->accept = 0;
     }
   }
 
@@ -172,50 +163,6 @@ int SendAll(const Record* const cur, const char ch) {
   if (cur->screen_150)
     if (Send(9, message_to_child)) return 1;
   return 0;
-}
-
-void SortTime() {
-  Record *pre, *cur, *nex, *end;
-  end = pre = cur = nex = head_s->next;
-  int count = 0;
-  while (end != NULL) {
-    cur = end;
-    pre = cur->pre;
-    while (pre != NULL && cur->hour < pre->hour && pre->hour >= 0) {
-      pre->pre->next = cur;
-      if (cur->next != NULL) cur->next->pre = pre;
-      cur->pre = pre->pre;
-      pre->next = cur->next;
-      cur->next = pre;
-      pre->pre = cur;
-      if (0 == count) end = end->next;
-      count++;
-      pre = cur->pre;
-    }
-    end = end->next;
-  }
-}
-
-void SortWeight() {
-  Record *pre, *cur, *nex, *end;
-  end = pre = cur = nex = head_s->next;
-  int count = 0;
-  while (end != NULL) {
-    cur = end;
-    pre = cur->pre;
-    while (pre != NULL && cur->weight > pre->weight && pre->weight >= 0) {
-      pre->pre->next = cur;
-      if (cur->next != NULL) cur->next->pre = pre;
-      cur->pre = pre->pre;
-      pre->next = cur->next;
-      cur->next = pre;
-      pre->pre = cur;
-      if (0 == count) end = end->next;
-      count++;
-      pre = cur->pre;
-    }
-    end = end->next;
-  }
 }
 
 //for child device process

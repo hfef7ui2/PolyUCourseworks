@@ -118,7 +118,7 @@ void PrintSchd(Record* const rd) {
   Format(total - rejected_a - rejected_b);
   Format(total == 0 ? 0 : (total - rejected_a - rejected_b) * 100 / total);
   printf("|\n");
-  printf("|      Number of Bookings Rejected: %d (%.1f%%)                                 ", rejected_a + rejected_b + rejected_d, total == 0 ? 0.0 : (double) (rejected_a + rejected_b) * 100.0 / (double) (total));
+  printf("|      Number of Bookings Rejected: %d (%.1f%%)                                 ", rejected_a + rejected_b + rejected_d, total == 0 ? 0.0 : (double) (rejected_a + rejected_b + rejected_d) * 100.0 / (double) (total));
   Format(rejected_a + rejected_b);
   Format(total == 0 ? 0 : (rejected_a + rejected_b) * 100 / total);
   printf("|\n");
@@ -186,7 +186,7 @@ void PrintReject(Record* rd) {
 }
 
 int(*PrintTimeHelper(int a))[2]{
-int i;
+  int i;
 int leap[13] = { 0,31,60,91,121,152,183,213,244,274,305,335,366 };
 int temp = a / 9 - 13 + time_set;
 int(*monthday)[2];
